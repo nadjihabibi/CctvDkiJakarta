@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="1sp"
+        android:footerDividersEnabled="false"
+        android:forceDarkAllowed="false"
+        android:headerDividersEnabled="false" tools:targetApi="q"/>
+
+    <Button
+        android:id="@+id/buttonDismiss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F00C1311"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/dismiss"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
