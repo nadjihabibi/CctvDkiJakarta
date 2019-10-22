@@ -25,7 +25,7 @@ public class AppController extends Application {
         myContext = this;
     }
 
-    public static Context getContext(){
+    public static Context getContext() {
         return myContext;
     }
 

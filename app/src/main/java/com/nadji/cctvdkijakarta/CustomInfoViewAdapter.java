@@ -32,9 +32,6 @@ public class CustomInfoViewAdapter implements GoogleMap.InfoWindowAdapter {
         Geocoder geocoder = new Geocoder(AppController.getContext(), Locale.getDefault());
         List<Address> addresses = null;
         try {
-
-//                            addresses = String.valueOf(geocoder.getFromLocation(Double.valueOf(item.getLat()), Double.valueOf(item.getLng()), 1));
-//                            addresses = geocoder.getFromLocation(Double.valueOf(item.getLat()), Double.valueOf(item.getLng()), 1);
             addresses = geocoder.getFromLocation(Double.valueOf(lat), Double.valueOf(lng), 1);
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,40 +40,11 @@ public class CustomInfoViewAdapter implements GoogleMap.InfoWindowAdapter {
 
         ((TextView) popup.findViewById(R.id.info_window)).setText(alamat);
 
-
-//        ((TextView) popup.findViewById(R.id.info_window)).setText(String.valueOf(lat));
         return popup;
-//        return null;
     }
 
     @Override
     public View getInfoContents(Marker marker) {
-//        final View popup = mInflater.inflate(R.layout.info_marker_layout, null);
-//        ((TextView) popup.findViewById(R.id.info_window)).setText(String.valueOf(marker.getPosition()));
-//        return popup;
         return null;
     }
 }
-
-//public class CustomInfoViewAdapter implements GoogleMap.InfoWindowAdapter {
-//    private final LayoutInflater mInflater;
-//
-//    public CustomInfoViewAdapter(LayoutInflater inflater) {
-//        this.mInflater = inflater;
-//    }
-//
-//    @Override
-//    public View getInfoWindow(Marker marker) {
-//        final View popup = mInflater.inflate(R.layout.info_window_layout, null);
-//        ((TextView) popup.findViewById(R.id.title)).setText(marker.getSnippet());
-//        return popup;
-//        //return null;
-//    }
-//
-//    @Override
-//    public View getInfoContents(Marker marker) {
-//        final View popup = mInflater.inflate(R.layout.info_window_layout, null);
-//        ((TextView) popup.findViewById(R.id.title)).setText(marker.getSnippet());
-//        return popup;
-//    }
-//}

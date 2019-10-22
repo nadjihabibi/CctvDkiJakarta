@@ -77,7 +77,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.setOnMarkerClickListener(clusterManager);
         googleMap.setOnInfoWindowClickListener(clusterManager);
 
-
 //        InfoWindowAdapter markerInfoWindowAdapter = new InfoWindowAdapter(getApplicationContext());
 //        googleMap.setInfoWindowAdapter(clusterManager.getMarkerManager());
         //clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new InfoWindowAdapter());
@@ -94,26 +93,34 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onClusterClick(Cluster<MarkerClusterItem> cluster) {
                 Collection<MarkerClusterItem> listItems = cluster.getItems();
-                final List<String> listNames = new ArrayList<>();
+                final List<String> listAlamat = new ArrayList<>();
+                final List<String> listAlamat2 = new ArrayList<>();
                 for (MarkerClusterItem item : listItems) {
+                    String linkcamera = item.getTitle();
 
                     //..................Menampilkan Listview dialog di marker...........................
 //                listNames.add(item.getLat()+","+ item.getLng());
                     Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                     List<Address> addresses = null;
                     try {
-//                    addresses = String.valueOf(geocoder.getFromLocation(Double.valueOf(item.getLat()), Double.valueOf(item.getLng()), 1));
                         addresses = geocoder.getFromLocation(Double.valueOf(item.getPosition().latitude), Double.valueOf(item.getPosition().longitude), 1);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     String address = addresses.get(0).getAddressLine(0);
-                    listNames.add(address);
+                    listAlamat.add(address);
+                    listAlamat2.add(linkcamera);
                 }
+                ArrayList<HashMap<String, List<String>>> listt = new ArrayList<>();
+                HashMap<String, List<String>> hashMap = new HashMap<>();
+                hashMap.put("alamatt", listAlamat);
+                hashMap.put("linkk", listAlamat2);
+                listt.add(hashMap);
+//                Log.e("cetak listt: ", String.valueOf(hashMap));
                 gMap.animateCamera(CameraUpdateFactory.newLatLng(cluster.getPosition()), new GoogleMap.CancelableCallback() {
                     @Override
                     public void onFinish() {
-                        ListViewDialog listViewDialog = new ListViewDialog(MainActivity.this, listNames);
+                        ListViewDialog listViewDialog = new ListViewDialog(MainActivity.this, listt);
                         listViewDialog.showDialog();
                     }
 
