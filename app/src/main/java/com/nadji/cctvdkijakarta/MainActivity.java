@@ -4,14 +4,22 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -158,9 +166,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     // Fungsi get JSON marker
     private void getMarkers() {
+        LottieAnimationView lottieLoading = findViewById(R.id.loading);
+        LottieAnimationView lottieNetworkError = findViewById(R.id.networkError);
+        lottieLoading.setVisibility(View.VISIBLE);
         StringRequest strReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                lottieLoading.setVisibility(View.INVISIBLE);
                 try {
                     JSONObject jObj = new JSONObject(response);
                     String getObject = jObj.getString("features");
@@ -170,8 +182,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         JSONObject properties = jsonObject.getJSONObject("properties");
                         JSONObject lokasi = properties.getJSONObject("location");
-//                        String latt = lokasi.getString("latitude");
-//                        String longg = lokasi.getString("longitude");
                         link = properties.getString(LINK);
                         latLng = new LatLng(Double.parseDouble(lokasi.getString(LAT)), Double.parseDouble(lokasi.getString(LNG)));
                         // Menambah data marker yang tercluster untuk di tampilkan ke google map
@@ -186,8 +196,25 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }, error -> {
-            Log.e("Error: ", error.getMessage());
-            Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            lottieLoading.setVisibility(View.INVISIBLE);
+            String message = null;
+            if (error instanceof NetworkError) {
+                lottieNetworkError.setVisibility(View.VISIBLE);
+                message = "Cannot connect to Internet...Please check your connection!";
+            } else if (error instanceof ServerError) {
+                message = "The server could not be found. Please try again after some time!!";
+            } else if (error instanceof AuthFailureError) {
+                message = "Cannot connect to Internet...Please check your connection!";
+            } else if (error instanceof ParseError) {
+                message = "Parsing error! Please try again after some time!!";
+            } else if (error instanceof NoConnectionError) {
+                message = "Cannot connect to Internet...Please check your connection!";
+            } else if (error instanceof TimeoutError) {
+                message = "Connection TimeOut! Please check your internet connection.";
+            }
+            Toast toast = Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
         }) {
             @Override
             public Map<String, String> getHeaders() {

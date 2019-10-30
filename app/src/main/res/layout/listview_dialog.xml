@@ -19,9 +19,9 @@
         android:id="@+id/buttonDismiss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F00C1311"
-        android:fontFamily="@font/roboto_condensed_regular"
+        android:background="#F017DA85"
+        android:fontFamily="@font/montserrat_light"
         android:text="@string/dismiss"
-        android:textColor="#FFFFFF" />
+        android:textColor="#000000" />
 
 </LinearLayout>

@@ -3,8 +3,9 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA3wcQVcNy6TCqXo2CHrrpGEIPFEwBSbnM</string>
     <!--<string name="url">http://api.jakarta.go.id/v1/cctvbalitower/?format=geojson</string>-->
     <string name="autorization_key">J4cMsZFdpYnK2R/gE6uDKA5iH1Ldj9bbs8qVGWF90VsooOkPQVr1j1XlNDzrWrbW4iMI5m/0ZDEX1pYI0w+hsvpIy/697QTmWJ/POR1q6tk=</string>
-    <string name="dismiss">Dismiss</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dismiss">Tutup</string>
+    <string name="bg">bg</string>
+    <string name="logo">logo</string>
+    <string name="judul">CCTV</string>
+    <string name="sub_judul">DKI Jakarta</string>
 </resources>
